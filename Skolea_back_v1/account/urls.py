@@ -1,6 +1,4 @@
-from django.contrib import admin
-from django.urls import path, include, reverse_lazy
-# , ResetPassword, ResetPasswordDone, ResetPasswordConfirm, ResetPasswordComplete
+from django.urls import path
 from account.views import SignupProfile, StudentCreate, TeacherCreate, Login, Logout, ResetPassword, ResetPasswordDone, ResetPasswordConfirm, ResetPasswordComplete
 
 app_name = "account"

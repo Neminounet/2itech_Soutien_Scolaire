@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'workspace',
+    'degrees_subjects',
+    'rdv',
 ]
 
 MIDDLEWARE = [
@@ -126,8 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "account.CustomUser"
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "workspace:home"
 
 LOGOUT_REDIRECT_URL = "home"
+
+LOGIN_URL = "account:login"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

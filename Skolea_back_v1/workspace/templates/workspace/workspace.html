@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <a href="{% url 'home' %}">revenir à l'accueil</a>
+    </p>
+    <h1>Bienvenue dans le workspace</h1>
+    <h2>Bienvenue {{ user.first_name }} </h2>
+
+    {% for degree in degrees %}
+        <h2>{{ degree.libelle }}</h2>
+        <ul>
+            {% for subject in degree.subject.all %}
+                <li>{{ subject.libelle }}</li>
+            {% endfor%}
+        </ul>
+    {% endfor %}
+</body>
+</html>

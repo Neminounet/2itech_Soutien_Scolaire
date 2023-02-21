@@ -1,10 +1,6 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-
-
-class Level(models.Model):
-    libelle = models.CharField(max_length=255, blank=False, null=False)
-    price = models.IntegerField(blank=False, null=False)
+from degrees_subjects.models import Degree
 
 
 class MyUserManager(BaseUserManager):
@@ -60,7 +56,7 @@ class Student(models.Model):
         CustomUser, on_delete=models.CASCADE, primary_key=True)
     age = models.IntegerField(blank=True, null=True)
     classe = models.ForeignKey(
-        Level, on_delete=models.SET_NULL, null=True, blank=True)
+        Degree, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class Teacher(models.Model):
