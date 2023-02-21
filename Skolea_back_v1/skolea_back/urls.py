@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from skolea_back.views import home
 
+
 urlpatterns = [
     path("", home, name="home"),
     path('admin/', admin.site.urls),
-    path("account/", include("account.urls"))
+    path("account/", include("account.urls")),
 ]

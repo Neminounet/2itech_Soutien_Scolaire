@@ -10,10 +10,15 @@
     <p>Bonjour Veuillez vous connecter</p>
     <form method="post">
         {% csrf_token %}
-        <label for="login-email">Entrez votre adresse email :</label>
+        <p>
+            <a href="{% url 'home' %}">Revenir à la page d'accueil</a>
+        </p>
+        <!-- <label for="login-email">Entrez votre adresse email :</label>
         <input type="email" name="login-email" id="login-email">
         <label for="login-password">Entrez votre mot de passe :</label>
         <input type="password" name="login-password" id="login-password">
+        <p>{{ error }}</p> -->
+        {{ form.as_p }}
         <input type="submit" value="Vous connecter">
     </form>
 </body>
