@@ -8,12 +8,23 @@
 </head>
 <body>
     <h1>Page d'accueil et présentation du site</h1>
-    <p>
-        <a href="">Se connecter</a>
-    </p>
-    <p>
-        <a href="{% url 'account:signup-choice' %}">Créer un compte</a>
-    </p>
+
+    {% if not request.user.is_authenticated %}
+        <p>
+            <a href="{% url 'account:login' %}">Se connecter</a>
+        </p>
+        <p>
+            <a href="{% url 'account:signup-choice' %}">Créer un compte</a>
+        </p>
+    {% endif %}
+    
     <p>hey bienvenue sur le super site</p>
+
+    {% if request.user.is_authenticated %}
+        <p> Bonjour {{ request.user.first_name }} {{ request.user.last_name}}</p>
+        <p>
+            <a href="{% url 'account:logout' %}">Se déconnecter</a>
+        </p>
+    {% endif %}
 </body>
 </html>

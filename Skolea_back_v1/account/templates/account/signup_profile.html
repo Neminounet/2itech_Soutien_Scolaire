@@ -10,7 +10,7 @@
     <p>
         <a href="{% url 'account:signup-choice' %}">Revenir au choix précédent</a>
     </p>
-    <h1>Veuillez vous inscrire en tant qu'étudiant</h1>
+    <h1>Inscription {{ status }}</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form }}
