@@ -1,0 +1,42 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de RDV</title>
+</head>
+<body>
+    <h2>Prendre un Rendez-vous</h2>
+    <p>Bienvenue {{student.first_name}} {{student.last_name}}</p>
+    <p>
+        <a href="{% url 'workspace:home' %}">Revenir au workspace</a>
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Selection de la classe -->
+        <label for="degree-select">Choisir une classe</label>
+        <select name="degree-select" id="degree-select">
+            {% for degree in degrees %}
+                <option value="{{degree.id}}">{{degree}}</option>
+            {% endfor %}
+        </select>
+        <!-- Selection de la matière -->
+        <label for="subject-select">Choisir une matière</label>
+        <select name="subject-select" id="subject-select">
+        {% for subject in subjects %}
+                <option value="{{subject.id}}">{{subject}}</option>
+        {% endfor %}
+        </select>
+        <br>
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date">
+        <br>
+        <label for="hour_id">Heure</label>
+        <select name="hour_id" id="hour_id">
+        {% for hour in available_hours_for_date %}
+            <option value="{{ hour.id }}">{{ hour.start_time }} - {{ hour.end_time }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="Valider">
+    </form>
+</body>

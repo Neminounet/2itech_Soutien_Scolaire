@@ -94,7 +94,3 @@ class Availablity(models.Model):
 
     def get_absolute_url(self):
         return reverse('workspace:home')
-
-# class RDV(models.Model):
-#     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
-#     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
