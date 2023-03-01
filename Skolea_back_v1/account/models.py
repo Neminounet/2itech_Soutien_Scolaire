@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from degrees_subjects.models import Degree
 
@@ -22,6 +23,7 @@ class MyUserManager(BaseUserManager):
                                 first_name=first_name, last_name=last_name)
         user.is_admin = True
         user.is_staff = True
+        user.is_teacher = True
         user.save()
         return user
 
@@ -62,3 +64,37 @@ class Student(models.Model):
 class Teacher(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, primary_key=True)
+
+    @property
+    def get_name(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+    def __str__(self):
+        template = self.get_name
+        return template
+
+
+class Hour(models.Model):
+    debut = models.TimeField(null=True, blank=True)
+    fin = models.TimeField()
+    taken = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.debut}"
+
+
+class Availablity(models.Model):
+    teacher = models.ForeignKey(
+        Teacher, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateField()
+    heure = models.ManyToManyField(Hour)
+
+    def __str__(self):
+        return f"{self.date}"
+
+    def get_absolute_url(self):
+        return reverse('workspace:home')
+
+# class RDV(models.Model):
+#     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
+#     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)

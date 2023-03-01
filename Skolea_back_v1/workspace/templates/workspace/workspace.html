@@ -12,14 +12,59 @@
     </p>
     <h1>Bienvenue dans le workspace</h1>
     <h2>Bienvenue {{ user.first_name }} </h2>
+    <hr>
+    {% if user.is_teacher %}
+    <h3>Compétences</h3>
+        <p>
+            <a href="{% url 'workspace:skills_selector' %}">Selectionner ses skills</a>
+        </p>
+        <div style="display: flex;">
+            {% for tds in teacher_degree_subject %}
+                <div>
+                    <p>{{ tds.degree.libelle }} {{tds.id}} <a href="{% url 'workspace:skills_delete' pk=tds.id %}"> Supprimer</a></p>
+        
+                    <ul>
+                        {% for subject in tds.subject.all %}
+                            <li>{{subject.libelle}} </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
 
-    {% for degree in degrees %}
-        <h2>{{ degree.libelle }}</h2>
-        <ul>
-            {% for subject in degree.subject.all %}
-                <li>{{ subject.libelle }}</li>
-            {% endfor%}
-        </ul>
-    {% endfor %}
+        <hr>
+        <h3>Disponibilités</h3>
+        <p>
+            <a href="{% url 'workspace:dispo_select' %}">Selectionner ses Disponibilités</a>
+        </p>
+        <div style="display: flex;">
+            {% for dispo in disponibilite %}
+                <div>
+                    <p>
+                        {{ dispo }} {{ dispo.id }}
+                        <a href="{% url 'workspace:dispo_delete' pk=dispo.id %}"> X</a>
+                    </p>
+                    {% for h in dispo.heure.all %}
+                    <ul>
+                        <li>{{h.debut}} à {{h.fin}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+        <h3>Rendez-Vous</h3>
+
+    {% endif %}
+
+    {% if user.is_student %}
+        <p>
+            Bonjour Mr L'étudiant
+        </p>
+        <h3>Rendez-Vous</h3>
+
+    {% endif %}
+
 </body>
 </html>
